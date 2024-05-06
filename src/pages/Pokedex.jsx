@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 
 import Pokemon from '../components/Pokemon';
 import Loader from '../components/Loader';
@@ -30,7 +30,7 @@ const Pokedex = () => {
     }, [])
 
     return(
-        <>
+        <Container className='pokedex-page'>
             {loading ? (
                 <Loader />
             ) : (
@@ -42,7 +42,7 @@ const Pokedex = () => {
                     ))}
                 </Row>
             )}
-        </>
+        </Container>
     );
 }
 
