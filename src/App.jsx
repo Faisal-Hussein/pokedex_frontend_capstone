@@ -22,6 +22,7 @@ export default function App() {
         <Route path='/register' element={<RegisterPage />}/>
         <Route path='/pokedex' element={<Pokedex />}/>
         <Route path='/pokemon/:id' element={<PokemonInfoPage />}/>
+        <Route path='/logout' element={<LoginPage />}/>
       </Routes>
       {/* <LoginForm /> */}
       {/* <RegisterForm /> */}

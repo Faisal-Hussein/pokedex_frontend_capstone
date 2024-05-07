@@ -12,7 +12,7 @@ const PokemonInfoPage = () => {
 
     const [pokemonInfo, setPokemonInfo] = useState();
     const [loading, setLoading] = useState(true);
-    const { user } = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
     
     const getPokemon = async (id) =>{
         const info = await getPokemonInfo(id);
@@ -30,7 +30,21 @@ const PokemonInfoPage = () => {
         getPokemon(id);
     }, [id]); // Include id in the dependency array
 
-    // const setFavorite = async
+   async function setFavorite(userId, pokemonId) {
+    const res = await fetch('http://127.0.0.1:5000/favorites', {
+        method: "POST",
+        headers: {'Content-Type' : 'application/json' },
+        body: JSON.stringify({
+            userId : userId,
+            pokemonId : pokemonId
+        })
+    })
+    if (res.ok) { 
+        let userCopyInfo = user
+        userCopyInfo.favorites.push(pokemonId)
+        setUser(userCopyInfo)
+    }
+   }
 
 
     return (
@@ -60,7 +74,7 @@ const PokemonInfoPage = () => {
                                             user.favorites && user.favorites.includes(pokemonInfo.id)?
                                                 <Button className='mt-5'>Unfavorite</Button>
                                             :
-                                            <Button className='mt-5'>
+                                            <Button className='mt-5' onClick={setFavorite}>
                                                 Favorite
                                             </Button>
                                             }
