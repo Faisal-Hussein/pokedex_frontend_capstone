@@ -1,6 +1,6 @@
 
 .app {
-  /* background-color: rgb(111, 202, 255); */
+  background-color: rgb(111, 202, 255);
   color: black;
   min-height: 100vh;
 }
@@ -38,7 +38,7 @@
 
 .pokemon-info{
   background-color: aquamarine;
-  height: 100vh;
+  height: 100%;
 }
 
 .link-name {

@@ -11,6 +11,7 @@ export default function UserProvider({ children }) {
   const values = {
     user,
     setUser,
+    
   }
 
   return <UserContext.Provider value={values}>

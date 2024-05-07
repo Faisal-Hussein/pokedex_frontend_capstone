@@ -23,7 +23,10 @@ export default function Header() {
               <NavLink as={Link} to={'/login'}>Login</NavLink>
               <NavLink as={Link} to={'/Pokedex'}>Pokedex</NavLink>
             </> :
+            <>
+            <NavLink as={Link} to={'/Pokedex'}>Pokedex</NavLink>           
             <NavLink as={Link} to={'/logout'}>Logout</NavLink>
+            </>
         }
       </Container>
     </Navbar>

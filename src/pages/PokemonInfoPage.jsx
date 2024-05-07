@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Card, Row, Col } from 'react-bootstrap';
+import { Container, Card, Row, Col, Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 
 import Loader from '../components/Loader';
+import { UserContext } from '../contexts/UserContext';
+
 
 const PokemonInfoPage = () => {
     const { id } = useParams(); // Using useParams hook to get route parameters
 
     const [pokemonInfo, setPokemonInfo] = useState();
     const [loading, setLoading] = useState(true);
-    
+    const { user } = useContext(UserContext)
     
     const getPokemon = async (id) =>{
         const info = await getPokemonInfo(id);
@@ -27,6 +29,9 @@ const PokemonInfoPage = () => {
     useEffect(() => {
         getPokemon(id);
     }, [id]); // Include id in the dependency array
+
+    // const setFavorite = async
+
 
     return (
         <Container className='pokemon-info'>
@@ -46,6 +51,22 @@ const PokemonInfoPage = () => {
                                     </Card.Title>
                                 </Link>
                             </Card.Body>
+                            <Row>
+                                        <Col>
+
+                                            {!user.username?
+                                                <Button className='mt-5'>Log in to favorite!</Button>
+                                            :
+                                            user.favorites && user.favorites.includes(pokemonInfo.id)?
+                                                <Button className='mt-5'>Unfavorite</Button>
+                                            :
+                                            <Button className='mt-5'>
+                                                Favorite
+                                            </Button>
+                                            }
+ 
+                                        </Col>
+                                    </Row>
                         </Card>   
                     </Col>
                     <Col xs={12} sm={12} md={12} lg={12} xl={12}>
