@@ -13,7 +13,7 @@ const PokemonInfoPage = () => {
     const [pokemonInfo, setPokemonInfo] = useState();
     const [loading, setLoading] = useState(true);
     const { user, setUser } = useContext(UserContext)
-    const [ favorite, setNewFavorite] = useState();
+    const [unfavorited, setUnfavorited] = useState(false);
 
     console.log(user.favorites)
 
@@ -57,6 +57,22 @@ const PokemonInfoPage = () => {
     }
    }
 
+   async function unFavorite() {
+    console.log(user)
+    const res = await fetch('http://127.0.0.1:5000/favorites', {
+        method: "DELETE",
+        headers: {'Content-Type' : 'application/json', 'Authorization' : 'Bearer ' + user.accessToken },
+        body: JSON.stringify({
+            pokemon_id : pokemonInfo.id
+        })
+    })
+    if (res.ok) {
+        const updatedFavorites = user.favorites.filter(fav => fav !== pokemonInfo.id);
+        setUser({ ...user, favorites: updatedFavorites });
+        setUnfavorited(true);
+    }
+   }
+
 
     return (
         <Container className='pokemon-info'>
@@ -83,7 +99,9 @@ const PokemonInfoPage = () => {
                                                 <Button className='mt-5'>Log in to favorite!</Button>
                                             :
                                             user.favorites.includes(pokemonInfo.id)?
-                                                <Button className='mt-5'>Unfavorite</Button>
+                                                <Button className='mt-5' onClick={unFavorite}>
+                                                    Unfavorite
+                                                </Button>
                                             :
                                             <Button className='mt-5' onClick={setFavorite}>
                                                 Favorite 

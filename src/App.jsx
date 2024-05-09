@@ -10,6 +10,7 @@ import RegisterPage from './pages/RegisterPage'
 import Pokedex from './pages/Pokedex'
 import PokemonInfoPage  from './pages/PokemonInfoPage'
 import FavoritesPage from './pages/FavoritesPage'
+import Logout from './components/Logout'
 
 
 export default function App() {
@@ -24,7 +25,7 @@ export default function App() {
         <Route path='/pokedex' element={<Pokedex />}/>
         <Route path='/pokemon/:id' element={<PokemonInfoPage />}/>
         <Route path='/favorites' element={<FavoritesPage />}/>
-        <Route path='/logout' element={<LoginPage />}/>
+        <Route path='/logout' element={<Logout />}/>
       </Routes>
       {/* <LoginForm /> */}
       {/* <RegisterForm /> */}

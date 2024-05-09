@@ -1,10 +1,10 @@
-import Body from '../components/Body'
+import { Container } from 'react-bootstrap'
 import RegisterForm from '../components/forms/RegisterForm'
 
 export default function RegisterPage() {
   return (
-    <Body sidebar={false}>
+    <Container>
         <RegisterForm />
-    </Body>
+    </Container>
   )
 }
