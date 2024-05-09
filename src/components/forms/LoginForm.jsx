@@ -35,6 +35,7 @@ export default function LoginForm(){
         if (res.ok) {
             // const { access_token } = await res.json();
             const  access_token  = await res.json();
+            console.log(access_token)
             setUser({...userLogin, accessToken: access_token.access_token, favorites : access_token.favorites})
             navigate('/')
             toast.success(`User: ${userLogin.username} logged in`)

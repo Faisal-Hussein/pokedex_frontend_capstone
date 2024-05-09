@@ -24,7 +24,8 @@ export default function Header() {
               <NavLink as={Link} to={'/Pokedex'}>Pokedex</NavLink>
             </> :
             <>
-            <NavLink as={Link} to={'/Pokedex'}>Pokedex</NavLink>           
+            <NavLink as={Link} to={'/Pokedex'}>Pokedex</NavLink>   
+            <NavLink as={Link} to={'/favorites'}>Favorites</NavLink>
             <NavLink as={Link} to={'/logout'}>Logout</NavLink>
             </>
         }

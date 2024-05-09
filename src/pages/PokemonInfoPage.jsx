@@ -13,7 +13,12 @@ const PokemonInfoPage = () => {
     const [pokemonInfo, setPokemonInfo] = useState();
     const [loading, setLoading] = useState(true);
     const { user, setUser } = useContext(UserContext)
-    
+    const [ favorite, setNewFavorite] = useState();
+
+    console.log(user.favorites)
+
+    console.log(pokemonInfo)
+
     const getPokemon = async (id) =>{
         const info = await getPokemonInfo(id);
         setPokemonInfo(info.data);
@@ -27,22 +32,28 @@ const PokemonInfoPage = () => {
     };
 
     useEffect(() => {
-        getPokemon(id);
-    }, [id]); // Include id in the dependency array
+        if(!pokemonInfo){
+            console.log("Getting pokemon . . .")
+            getPokemon(id);
+        }    
+    }, [id, user]); // Include id in the dependency array
 
-   async function setFavorite(userId, pokemonId) {
+   async function setFavorite() {
+    console.log(user, pokemonInfo.id)
     const res = await fetch('http://127.0.0.1:5000/favorites', {
         method: "POST",
-        headers: {'Content-Type' : 'application/json' },
+        headers: {'Content-Type' : 'application/json', 'Authorization' : 'Bearer ' + user.accessToken },
         body: JSON.stringify({
-            userId : userId,
-            pokemonId : pokemonId
+            pokemon_id : pokemonInfo.id
         })
     })
     if (res.ok) { 
+        console.log("New favorite")
         let userCopyInfo = user
-        userCopyInfo.favorites.push(pokemonId)
+        userCopyInfo.favorites.push(pokemonInfo.id)
+        // setNewFavorite(pokemonInfo.id)
         setUser(userCopyInfo)
+        this.forceUpdate()
     }
    }
 
@@ -71,11 +82,11 @@ const PokemonInfoPage = () => {
                                             {!user.username?
                                                 <Button className='mt-5'>Log in to favorite!</Button>
                                             :
-                                            user.favorites && user.favorites.includes(pokemonInfo.id)?
+                                            user.favorites.includes(pokemonInfo.id)?
                                                 <Button className='mt-5'>Unfavorite</Button>
                                             :
                                             <Button className='mt-5' onClick={setFavorite}>
-                                                Favorite
+                                                Favorite 
                                             </Button>
                                             }
  
