@@ -40,7 +40,7 @@ const PokemonInfoPage = () => {
 
    async function setFavorite() {
     console.log(user, pokemonInfo.id)
-    const res = await fetch('http://127.0.0.1:5000/favorites', {
+    const res = await fetch('https://pw-141-flask-capstone.onrender.com/favorites', {
         method: "POST",
         headers: {'Content-Type' : 'application/json', 'Authorization' : 'Bearer ' + user.accessToken },
         body: JSON.stringify({
@@ -59,7 +59,7 @@ const PokemonInfoPage = () => {
 
    async function unFavorite() {
     console.log(user)
-    const res = await fetch('http://127.0.0.1:5000/favorites', {
+    const res = await fetch('https://pw-141-flask-capstone.onrender.com/favorites', {
         method: "DELETE",
         headers: {'Content-Type' : 'application/json', 'Authorization' : 'Bearer ' + user.accessToken },
         body: JSON.stringify({
